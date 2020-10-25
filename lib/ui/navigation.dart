@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/EmployeeDTO.dart';
 import 'package:flutter_app/services/token.services.dart';
+import 'package:flutter_app/ui/profile.dart';
+import 'package:flutter_app/ui/userProfile.dart';
 import 'package:flutter_app/ui/welcome/SilverApp.dart';
 import 'package:flutter_app/ui/welcome/welcome.dart';
 import 'dart:convert';
@@ -39,8 +41,9 @@ class _MyAppState extends State<navigation> {
     HomePage(),
     EmployeesPage(),
     AddEmployeePage(EmployeeDTO('','','','','','','',1,'','','','',1,'','')),
-    SliverAppBarPage(),
-    Logout()
+   // Logout(),
+    //userProfile()
+    profile()
   ];
 
   _changeIndex(int index) {
@@ -77,8 +80,8 @@ class _MyAppState extends State<navigation> {
             title: Text("Notifications"),
           ),
           BottomNavigationBarItem(icon: Icon(Icons.person_add), title: Text("New")),
-          BottomNavigationBarItem(icon: Icon(Icons.settings_applications), title: Text("Settings")),
-          BottomNavigationBarItem(icon: Icon(Icons.power_settings_new), title: Text("Logout"),)
+          //BottomNavigationBarItem(icon: Icon(Icons.power_settings_new), title: Text("Logout")),
+          BottomNavigationBarItem(icon: Icon(Icons.person_pin), title: Text("Profile"))
         ],
       ),
     );

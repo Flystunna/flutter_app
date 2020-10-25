@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppGlobal{
-  //static String baseURL = ("http://172.18.103.193/cmsAPI").trim();
-  static String baseURL = ("http://172.18.103.193:45455").trim();
+  static String baseURL = ("http://172.18.25.193/cmsAPI").trim();
+  //static String baseURL = ("http://172.18.25.193:45455").trim();
   static int tokenExpire = 2;
 
 }

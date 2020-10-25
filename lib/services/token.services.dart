@@ -10,6 +10,7 @@ import 'package:flutter_app/services/storageUtil.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class tokenService {
   static String tokenURL = AppGlobal.baseURL + "/api/token/auth";
@@ -67,9 +68,11 @@ class tokenService {
   }
 
   Future<String> isLoggedin() async {
-    final storage = new FlutterSecureStorage();
-    String auth = await storage.read(key: 'isAuth');
-    if(auth != null){
+    final prefs = await SharedPreferences.getInstance();
+    var auth = prefs.getString("isAuth");
+//    final storage = new FlutterSecureStorage();
+//    String auth = await storage.read(key: 'isAuth');
+    if(auth != "" || auth != null){
         return auth;
     }
     else {
@@ -79,6 +82,9 @@ class tokenService {
 
   static Future<bool> logout() async{
     await StorageUtil().delete_all();
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("email");
+    prefs.remove("isAuth");
     return true;
   }
 
@@ -92,7 +98,10 @@ class tokenService {
   }
 
   static Future<BaseResponse<tokenDTO>> login(LoginModel model) async {
-    final storage = new FlutterSecureStorage();
+    //final storage = new FlutterSecureStorage();
+    final prefs = await SharedPreferences.getInstance();
+
+    await StorageUtil().write_username(model.userName);
     var body = json.encode(model.toMap());
     var response = await http.post(tokenURL, headers: header, body: body);
     if (response.statusCode == 200) {
@@ -105,14 +114,12 @@ class tokenService {
         String date = DateFormat("yyyy-MM-dd hh:mm:ss").format(toExpire);
         baseResponse.object = deserialize;
         baseResponse.object.username = model.userName;
+        prefs.setString("email", model.userName);
+        prefs.setString("isAuth", deserialize.token != null ? "true" :  "");
         await StorageUtil().write_access_token(deserialize.token != null ? deserialize.token : "");
         await StorageUtil().write_refresh_token(deserialize.refreshToken != null ? deserialize.refreshToken : "");
         await StorageUtil().write_isAuth(deserialize.token != null ? 'true' :  "");
         await StorageUtil().write_expires(date != null ? date : "");
-//        await storage.write(key: "access_token", value: deserialize.token);
-//        await storage.write(key: "refresh_token", value: deserialize.refreshToken);
-//        await storage.write(key: "isAuth",  value: cc);
-//        await storage.write(key: "expires", value: date);
       }
       baseResponse.code = jsonResponse['code'];
       baseResponse.shortDescription = jsonResponse['shortDescription'];

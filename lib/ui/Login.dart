@@ -18,6 +18,7 @@ import 'components/text_field_container.dart';
 import 'customerSignup.dart';
 import 'employeesPage.dart';
 import 'navigation.dart';
+import 'otpPage.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -207,10 +208,19 @@ class MyCustomFormState extends State<MyCustomForm> {
                                 }
                                 if(resp.shortDescription != null) {
                                   if(loginSuccess(resp.shortDescription)) {
-                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text(resp.shortDescription), backgroundColor: Colors.green, duration: Duration(seconds: 1)));
+                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text(resp.shortDescription), backgroundColor: Colors.green, duration: Duration(seconds: 2)));
+                                  }
+                                  else if(resp.code.contains("302")){
+                                    //user hasnt been confirmed
+                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text(resp.shortDescription), backgroundColor: Colors.green, duration: Duration(seconds: 2)));
+                                    new Future<Null>.delayed(Duration(seconds: 3), () {
+                                      Navigator.of(context).pushReplacement(
+                                          new MaterialPageRoute(builder: (BuildContext context) => otpPage(resp.shortDescription))
+                                      );
+                                    });
                                   }
                                   else{
-                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text(resp.shortDescription), backgroundColor: Colors.redAccent, duration: Duration(seconds: 1)));
+                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text(resp.shortDescription), backgroundColor: Colors.redAccent, duration: Duration(seconds: 3)));
                                   }
                                 }
                                 if (resp.shortDescription.contains('Login Successful')) {

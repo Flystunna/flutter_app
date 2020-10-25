@@ -1,8 +1,13 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageUtil{
   final storage = new FlutterSecureStorage();
 
+  Future<String> get_email() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.getString("email") ?? "NA";
+  }
   Future<String> get_access_token() async {
     String accesstoken = await storage.read(key: 'access_token');
     return accesstoken;
@@ -35,6 +40,9 @@ class StorageUtil{
   }
   Future<void> write_expires(String value) async {
     await storage.write(key: "expires", value: value);
+  }
+  Future<void> write_username(String value) async {
+    await storage.write(key: "username", value: value);
   }
   Future<void> delete_all() async{
     await storage.deleteAll();

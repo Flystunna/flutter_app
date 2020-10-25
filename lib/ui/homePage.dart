@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/userProfileDTO.dart';
+import 'package:flutter_app/ui/userProfile.dart';
+import 'package:flutter_app/services/customer.services.dart';
+
+import 'Login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  userProfileDTO user = new userProfileDTO('', '', '', '', '', '', '', '', '', '', '','','','','','');
+
   Widget _buildDecoratedImage(Icons, String value) {
     return Container(
         decoration: BoxDecoration(
@@ -23,20 +30,137 @@ class HomePageState extends State<HomePage> {
                 SizedBox(height: 4),
                 Padding(
                   padding: EdgeInsets.all(3),
-                  child: Text(value),
+                  child: GestureDetector(
+                    onTap: () async {
+                      //_navigateToLogin();
+                      },
+                    child: Text(value),
+                  ),
+                  //Text(value),
                 ),
                 SizedBox(height: 4),
               ],
             )));
+  }
+  Widget _buildBank(Icons, String value) {
+    return Container(
+        decoration: BoxDecoration(
+          //border: Border.all(width: 3, color: Colors.black38),
+          borderRadius: const BorderRadius.all(const Radius.circular(70)),
+        ),
+        //margin: const EdgeInsets.all(4),
+        child: Card(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 4),
+                Icon(Icons),
+                SizedBox(height: 4),
+                Padding(
+                  padding: EdgeInsets.all(3),
+                  child: GestureDetector(
+                    onTap: () {
+                      //_navigateToProfile();
+                    },
+                    child: Text(value),
+                  ),
+                  //Text(value),
+                ),
+                SizedBox(height: 4),
+              ],
+            )));
+  }
+  Widget _buildMF(Icons, String value) {
+    return Container(
+        decoration: BoxDecoration(
+          //border: Border.all(width: 3, color: Colors.black38),
+          borderRadius: const BorderRadius.all(const Radius.circular(70)),
+        ),
+        //margin: const EdgeInsets.all(4),
+        child: Card(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 4),
+                Icon(Icons),
+                SizedBox(height: 4),
+                Padding(
+                  padding: EdgeInsets.all(3),
+                  child: GestureDetector(
+                    onTap: () {
+                      //_navigateToLogin();
+                    },
+                    child: Text(value),
+                  ),
+                  //Text(value),
+                ),
+                SizedBox(height: 4),
+              ],
+            )));
+  }
+  Widget _buildPension(Icons, String value) {
+    return Container(
+        decoration: BoxDecoration(
+          //border: Border.all(width: 3, color: Colors.black38),
+          borderRadius: const BorderRadius.all(const Radius.circular(70)),
+        ),
+        //margin: const EdgeInsets.all(4),
+        child: Card(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 4),
+                Icon(Icons),
+                SizedBox(height: 4),
+                Padding(
+                  padding: EdgeInsets.all(3),
+                  child: GestureDetector(
+                    onTap: () {
+                     // _navigateToLogin();
+                    },
+                    child: Text(value),
+                  ),
+                  //Text(value),
+                ),
+                SizedBox(height: 4),
+              ],
+            )));
+  }
+  void _navigateToLogin() async {
+    await Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Login()));
+  }
+
+//  void _navigateToProfile() async {
+//    await Navigator.pushReplacement(
+//        context,
+//        MaterialPageRoute(
+//            builder: (context) => userProfile()));
+//  }
+
+  getProfile() {
+    customerService.GetProfile().then((resp) {
+      //userProfileDTO model = new userProfileDTO('', '', '', '', '', '', '', '', '', '', '','','','','','');
+      if (resp != null) {
+        setState(() {
+          user = resp;
+        });
+      }
+    });
   }
 
   Widget _buildImageRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(child: _buildDecoratedImage(Icons.account_balance, "My Bank")),
-        Expanded(child: _buildDecoratedImage(Icons.markunread_mailbox, "Mutual Funds")),
-        Expanded(child: _buildDecoratedImage(Icons.group, "Pensions")),
+        Expanded(child: _buildBank(Icons.account_balance, "My Bank")),
+        Expanded(child: _buildMF(Icons.markunread_mailbox, "Mutual Funds")),
+        Expanded(child: _buildPension(Icons.group, "Pensions")),
       ],
     );
   }
@@ -111,19 +235,10 @@ class HomePageState extends State<HomePage> {
                               height: size.height * 0.18,
                             ),
                             Center(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text("Dreams. ",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500)),
-                                Text("Possibilities.",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold))
+                                child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text("Dreams. ", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500)),
+                                    Text("Possibilities.", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold))
                               ],
                             )),
                             Center(

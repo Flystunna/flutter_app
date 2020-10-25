@@ -1,19 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/helpers/AppGlobal.dart';
-import 'package:flutter_app/models/EmployeeDTO.dart';
-import 'package:flutter_app/models/LoginModel.dart';
 import 'package:flutter_app/models/userDTO.dart';
 import 'package:flutter_app/services/customer.services.dart';
-import 'package:flutter_app/services/token.services.dart';
-import 'package:flutter_app/ui/welcome/welcome.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
+
 import 'Login.dart';
-import 'addemployeePage.dart';
 import 'components/rounded_button.dart';
 import 'components/text_field_container.dart';
-import 'navigation.dart';
 import 'otpPage.dart';
 
 class CustomerSignup extends StatelessWidget {
@@ -49,7 +43,7 @@ class CustomerSignupForm extends StatefulWidget {
 // This class holds data related to the form.
 class CustomerSignupFormState extends State<CustomerSignupForm> {
   final _formKey = GlobalKey<FormState>();
-  userDTO _user = new userDTO('','','','','','','','','','','',0,'');
+  userDTO _user = new userDTO('','','','','','','','','','','',0,'','');
   bool _passwordVisible = false;
   DateTime pickedDate;
   TimeOfDay time;

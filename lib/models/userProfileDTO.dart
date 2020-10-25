@@ -1,4 +1,4 @@
-class userDTO {
+class userProfileDTO {
   String _email;
   String _password;
   String _phoneNumber;
@@ -10,12 +10,14 @@ class userDTO {
   String _nextOfKinPhone;
   String _nextOfKinName;
   String _dateOfBirth;
+  String _userTypes;
   int _id;
-  int _gender;
+  String _gender;
   String _otp;
   String _dateJoined;
+  String _referralCode;
 
-  userDTO(
+  userProfileDTO(
       this._email,
       this._password,
       this._phoneNumber,
@@ -28,10 +30,12 @@ class userDTO {
       this._nextOfKinName,
       this._dateOfBirth,
       this._gender, this._otp,
-      this._dateJoined);
+      this._dateJoined,
+      this._userTypes,
+      this._referralCode);
 
   // ignore: non_constant_identifier_names
-  userDTO.WithId(
+  userProfileDTO.WithId(
       this._email,
       this._password,
       this._phoneNumber,
@@ -45,7 +49,7 @@ class userDTO {
       this._dateOfBirth,
       this._id,
       this._gender, this._otp,
-      this._dateJoined);
+      this._dateJoined, this._userTypes, this._referralCode);
 
   int get id => _id;
   String get email => _email;
@@ -56,12 +60,14 @@ class userDTO {
   String get firstName => _firstName;
   String get lastName => _lastName;
   String get middleName => _middleName;
-  int get gender => _gender;
+  String get gender => _gender;
   String get nextOfKinName => _nextOfKinName;
   String get nextOfKinPhone => _nextOfKinPhone;
   String get dateOfBirth => _dateOfBirth;
   String get otp => _otp;
   String get dateJoined => _dateJoined;
+  String get userTypes => _userTypes;
+  String get referralCode => _referralCode;
 
 
   set id(int newId) {
@@ -75,7 +81,7 @@ class userDTO {
     _nextOfKinPhone = newnextOfKinPhone;
   }
 
-  set gender(int newGender) {
+  set gender(String newGender) {
     _gender = newGender;
   }
   set firstName(String newFirstName) {
@@ -119,6 +125,12 @@ class userDTO {
   set dateJoined(String newOTP) {
     _dateJoined = newOTP;
   }
+  set userTypes(String newuserTypes) {
+    _userTypes = newuserTypes;
+  }
+  set referralCode(String newreferralCode) {
+    _referralCode = newreferralCode;
+  }
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -135,7 +147,9 @@ class userDTO {
     map["nextOfKinName"] = _nextOfKinName;
     map["dateOfBirth"] = _dateOfBirth;
     map["dateJoined"] = _dateJoined;
+    map["userTypes"] = _userTypes;
     map["otp"] = _otp;
+    map["referralCode"] = _referralCode;
     if (_id != null) {
       map["id"] = _id;
     }
@@ -145,7 +159,7 @@ class userDTO {
     return map;
   }
 
-  userDTO.fromObject(dynamic o) {
+  userProfileDTO.fromObject(dynamic o) {
     this._id = o["id"];
     this._firstName = o["firstName"];
     this._lastName = o["lastName"];
@@ -161,6 +175,8 @@ class userDTO {
     this._password = o["password"];
     this._otp = o["otp"];
     this._dateJoined = o["dateJoined"];
+    this._userTypes = o["userTypes"];
+    this._referralCode = o["referralCode"];
   }
 }
 

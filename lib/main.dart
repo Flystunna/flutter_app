@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/Login.dart';
 import 'package:flutter_app/ui/customerSignup.dart';
+import 'package:flutter_app/ui/homePage.dart';
 import 'package:flutter_app/ui/navigation.dart';
 import 'package:flutter_app/ui/addemployeePage.dart';
 import 'package:flutter_app/ui/employeesPage.dart';
 import 'package:flutter_app/ui/otpPage.dart';
+import 'package:flutter_app/ui/profile.dart';
+import 'package:flutter_app/ui/userProfile.dart';
 import 'package:flutter_app/ui/welcome/welcome.dart';
 import 'models/EmployeeDTO.dart';
 
@@ -41,12 +44,15 @@ class MyApp extends StatelessWidget {
       ),
       home:
       //CustomerSignup(),
-      otpPage('Check your email for OTP'),
+      //otpPage('Check your email for OTP'),
       //Login(),
       //navigationTest(),
      // DateTimePickerPage(),
-      //WelcomeScreen(),
+      //profile(),
+      WelcomeScreen(),
+      //userProfile(),
       //Login(),
+      //HomePage(),
       //AddEmployeePage(EmployeeDTO('','','','','','','',1,'','','','',1,'')),
       //EmployeesPage(),
 //      home: MyHomePage(title: 'Screw Flutter Demo Home Page'),

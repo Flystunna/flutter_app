@@ -12,7 +12,6 @@ import 'employeesPage.dart';
 
 class AddEmployeePage extends StatefulWidget {
   final EmployeeDTO employee;
-
   AddEmployeePage(this.employee);
 
   @override
